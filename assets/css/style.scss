@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+:root{
+    --txt-clr:#757574;
+    --progress-body: #dcdbd7;
+    --progress-clr: linear-gradient(#CADDB6 30%,#B6CBA1);
+    --bg-clr: linear-gradient(#E6E5E2 60%,#C0BFBC);
+}
+$txt-clr: var(--txt-clr);
+$progress-body: var(--progress-body);
+$progress-clr: var(--progress-clr);
+$bg-clr: var(--bg-clr);
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 10px;
+    font-family: 'Poppins', sans-serif;
+    background: $bg-clr;
+    color: $txt-clr;
+    @media (max-width:600px){
+        font-size: 7px;
+    }
+}
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center ;
+    min-height: 100vh;
+}
+.main-txt{
+    font-size: 4.4em;
+}
+.sub-txt{
+    font-size: 1.9em;
+    font-weight: 500;
+    span{
+        display: inline-block;
+        width: 3px;
+        height: 5px;
+        background: $txt-clr;
+        transform: scaleY(1);
+        transform-origin: bottom;
+        animation: blink 1.5s linear infinite;
+        animation-delay: calc(var(--i) * 1.2s);
+        &:nth-child(1){
+            animation-delay: calc(var(--i) * 1s);
+        }
+    }
+}
+.reloader{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 3em;
+    padding: 20px;
+    z-index: 1;
+    cursor: pointer;
+    &::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 170%;
+        height: 170%;
+        background: linear-gradient(#fff,#cccfd5);
+        z-index: -1;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 100% 0);
+    }
+}
+.progress{
+    width: 55vw;
+    max-width: 580px;
+    height: 40px;
+    border-radius: 50px;
+    margin-bottom: 3em;
+    background: $progress-body;
+    box-shadow: inset 0 1px 6px rgba($color: #000000, $alpha: 0.2),
+                0 1px 8px #fff;
+    @media (max-width: 500px) {
+        width: 68vw;
+    }
+    &__bar{
+        position: relative;
+        width: 0;
+        height: 100%;
+        background: $progress-clr;
+        border-radius: inherit;
+        box-shadow: 0 5px 10px rgba($color: #000000, $alpha: 0.36),
+                    inset 0 1px 2px #fff,
+                    inset 0 -1px 5px rgba($color: #000000, $alpha: 0.1);
+    }
+    &__counter{
+        position: absolute;
+        top: -25px;
+        right: 0;
+        width: 4rem;
+        transform: translate(23% ,-100%);
+        font-size: 1.8em;
+        font-weight: 600;
+        background: linear-gradient(#fff,#cccfd5);
+        padding: 5px 12px;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px rgba($color: #000000, $alpha: 0.2),
+                    0 -6px 10px -9px #fff;
+        &::after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 17px;
+            height: 17px;
+            border-radius: 5px;
+            background: #cccfd5;
+            transform: translate(-50%,45%) rotate(-45deg);
+            clip-path: polygon(0 0, 100% 100%, 0 100%, 0 0);
+            box-shadow: inset 0 0 2px rgba($color: #000000, $alpha: 0.1);
+        }
+    }
+}
+
+@keyframes blink{
+    0%,100%{
+        transform: scaleY(1);
+    }
+    50%{
+        transform: scaleY(2);
+    }
+}
